@@ -10,7 +10,7 @@
     "start": "node ./server/app.js",
     "precommit": "lint-staged",
     "start:es6": "babel-node ./server/app.js",
-    "test": "mocha server/spec/server-spec.js; RES=$?; kill %1; exit $RES",
+    "test": "mocha server/spec/server-spec.js --timeout 20000 --exit",
     "test:es6": "mocha --compilers js:babel-register server/spec/server-spec.js; RES=$?; kill %1; exit $RES",
     "lint": "eslint ./"
   },
