@@ -1,4 +1,4 @@
-# Article Collector
+# Database
 ## Objectives
 - [ ] CommonJS 패턴, 즉 `export`와 `require` statements를 이용해 well-organized codebase를 만든다.
 - [ ] `fs` module을 활용해 파일을 다룰 줄 안다.

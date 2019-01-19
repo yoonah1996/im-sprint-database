@@ -1,4 +1,4 @@
-# Article Collector
+# Database
 
 ## 이번 Sprint의 학습 목표
 
