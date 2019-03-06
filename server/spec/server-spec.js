@@ -4,22 +4,8 @@
 const mysql = require('mysql');
 const request = require('request'); // You might need to npm install the request module!
 const expect = require('chai').expect;
-const path = require('path');
-const fs = require('fs');
 
-const studentsData = require('../../student.json');
 describe('Sprint-database', () => {
-  describe('student.json', function () {
-    it('should put correct class on students.json', function() {
-      let rawMessage = '기수를 숫자만! 입력해주세요! 예)10'
-      expect(studentsData.theClass === rawMessage || studentsData.theClass === "").to.be.false
-    })
-  
-    it('should put correct students on students.json', function() {
-      let rawMessage = '스프린트를 진행하는 수강생분의 이름을 한글로! 적어주세요! 예)존도우, 제인도우'
-      expect(studentsData.students === rawMessage || studentsData.students === "").to.be.false
-    })
-  });
   
   describe('Persistent Node Chat Server', function() {
     var dbConnection;
@@ -102,16 +88,5 @@ describe('Sprint-database', () => {
         });
       });
     });
-  });
-  
-  describe('REVIEW.md', () => {
-    it('should review on REVIEW.md\n      Bare Minimum을 완료하셨다면 REVIEW.md를 작성하고 Pull request를 만든 뒤 Advanced 진행부탁드립니다!', function() {
-      let rawFilepath = path.join(__dirname, 'raw_review.md')
-      let studentFilepath = path.join(__dirname, '../../REVIEW.md')
-  
-      let rawBuf = fs.readFileSync(rawFilepath);
-      let studentBuf = fs.readFileSync(studentFilepath);
-      expect(rawBuf.equals(studentBuf)).to.be.false
-    })
   });
 })

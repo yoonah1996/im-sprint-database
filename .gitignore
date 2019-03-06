@@ -130,3 +130,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+# prettier
+.prettierrc
+
+# students data
+review.json
+
+# code editro
+.vscode/
