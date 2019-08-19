@@ -1,3 +1,5 @@
+" 절대로 Pull Request (PR)을 날리지 마세요! 제출에 대해서는 README를 읽어주시기 바랍니다. 
+
 # Database
 
 ## Sprint를 시작하기 전 알고있어야 하는 것들
