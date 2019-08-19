@@ -1,4 +1,4 @@
-" 절대로 Pull Request (PR)을 날리지 마세요! 제출에 대해서는 README를 읽어주시기 바랍니다. 
+> 절대로 Pull Request (PR)을 날리지 마세요! 제출에 대해서는 README를 읽어주시기 바랍니다. 
 
 # Database
 
