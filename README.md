@@ -34,7 +34,6 @@ Sprint를 원활히 진행하기 위해 꼭 알고있어야하는 것들입니�
 
 ## 제출 방법
 
-1. [REVIEW.md](REVIEW.md) 파일에 이번 Sprint를 마무리하며 review를 작성합니다.
-2. 새로운 터미널을 띄워 `npm start`로 서버를 실행시킵니다.
-3. 기존 터미널에서 `npm run test`를 실행하여 테스트 결과를 수집합니다.
+1. 새로운 터미널을 띄워 `npm start`로 서버를 실행시킵니다.
+2. 기존 터미널에서 `npm run test`를 실행하여 테스트 결과를 수집합니다.
 3. `npm run submit` 으로 제출합니다.
