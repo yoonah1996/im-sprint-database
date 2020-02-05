@@ -28,6 +28,12 @@ Sprint를 원활히 진행하기 위해 꼭 알고있어야하는 것들입니�
 
 ## Advanced Challenge
 
+- [ ] Test를 최소 2개 이상 추가하기
+- [ ] sequelize-cli을 활용하기
+- [ ] migration과 seed 개념을 이해하고, 활용하기
+
+## Nightmare
+
 - [ ] non-relational database, MongoDB로 refactoring 한다.
 - [ ] Article Collector 를 mongoDB로 refactoring 한다.
 
