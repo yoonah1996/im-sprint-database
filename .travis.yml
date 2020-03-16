@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "stable"
+services:
+  - mysql
+before_script:
+  - mysql -u root --password="" < server/schema.sql

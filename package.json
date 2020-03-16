@@ -6,12 +6,7 @@
     "start": "node ./server/app.js",
     "precommit": "lint-staged",
     "lint": "eslint ./",
-    "run-test": "mocha server/spec/server-spec.js --timeout 20000 --exit",
-    "submit-test": "mocha server/spec/server-spec.js --reporter reporter.js --exit",
-    "test": "npm-run-all run-test submit-test",
-    "pre-test": "node __test__/preTest.js",
-    "check": "node .airci/submit.js",
-    "submit": "npm-run-all -c -s --silent pre-test check"
+    "test": "mocha server/spec/server-spec.js --timeout 20000 --exit"
   },
   "lint-staged": {
     "linters": {
@@ -34,7 +29,6 @@
     "eslint": "^5.7.0",
     "husky": "^1.0.1",
     "lint-staged": "^7.3.0",
-    "mocha": "^6.2.1",
-    "npm-run-all": "^4.1.5"
+    "mocha": "^6.2.1"
   }
 }
