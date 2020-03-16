@@ -17,7 +17,7 @@ describe("Sprint-database", () => {
       });
       dbConnection.connect();
 
-      var tablename = ""; // TODO: fill this out
+      var tablename = "messages";
 
       /* Empty the db table before each test so that multiple tests
        * (or repeated runs of the tests) won't screw each other up: */
@@ -44,7 +44,7 @@ describe("Sprint-database", () => {
               uri: "http://127.0.0.1:3000/classes/messages",
               json: {
                 username: "Valjean",
-                message: "In mercy's name, three days is all I need.",
+                text: "In mercy's name, three days is all I need.",
                 roomname: "Hello"
               }
             },
@@ -64,7 +64,7 @@ describe("Sprint-database", () => {
                 // Should have one result:
                 expect(results.length).to.equal(1);
 
-                expect(results[0].message).to.equal(
+                expect(results[0].text).to.equal(
                   "In mercy's name, three days is all I need."
                 );
 
@@ -97,9 +97,7 @@ describe("Sprint-database", () => {
           body
         ) {
           var messageLog = JSON.parse(body);
-          expect(messageLog[0].message).to.equal(
-            "Men like you can never change!"
-          );
+          expect(messageLog[0].text).to.equal("Men like you can never change!");
           expect(messageLog[0].roomname).to.equal("main");
           done();
         });
