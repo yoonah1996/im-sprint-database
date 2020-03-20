@@ -1,28 +1,30 @@
-var mysql = require('mysql');
+var mysql = require("mysql");
 
-class chatDatabase {
-    constructor() {
-        this.profile = { user: "root", password: "", database: "chat" };
-        this.dbConnection = this.getConnection();
-        this.startConnection = this.dbConnection.connect();
-        this.endConnection = this.dbConnection.end();
-    }
+const chatDatabase = (queryString, customProfile = null) => {
+  const defaultProfile = {
+    user: "root",
+    password: "PASSWORD",
+    database: "chat"
+  };
 
-    getConnection() {
-        mysql.createConnection(this.profile);
-    }
+  const dbConnection = mysql.createConnection(
+    customProfile ? customProfile : defaultProfile
+  );
 
-    queryConnection(queryString) {
-        this.startConnection();
-        this.dbConnection.query(queryString);
-        this.endConnection();
-    }
-    // dbConnection.connect();
-    // dbConnection.end();
-}
+  dbConnection.connect();
+  let queryResults;
+  dbConnection.query(queryString, (err, rows) => {
+    if (err) throw err;
+
+    queryResults = rows;
+  });
+  dbConnection.end();
+
+  return queryResult;
+};
 
 // Create a database connection and export it from this file.
 // You will need to connect with the user "root", no password,
 // and to the database "chat".
 
-module.exports = chatDatabase;
+module.exports = { chatDatabase };

@@ -12,12 +12,12 @@ describe("Sprint-database", () => {
     beforeEach(function(done) {
       dbConnection = mysql.createConnection({
         user: "root",
-        password: "",
+        password: "PASSWORD",
         database: "chat"
       });
       dbConnection.connect();
 
-      var tablename = "messages"; // TODO: fill this out
+      var tablename = "messages";
 
       /* Empty the db table before each test so that multiple tests
        * (or repeated runs of the tests) won't screw each other up: */
@@ -62,6 +62,7 @@ describe("Sprint-database", () => {
                 results
               ) {
                 // Should have one result:
+                console.log(results);
                 expect(results.length).to.equal(1);
 
                 expect(results[0].message).to.equal(
