@@ -62,7 +62,6 @@ describe("Sprint-database", () => {
                 results
               ) {
                 // Should have one result:
-                console.log(results);
                 expect(results.length).to.equal(1);
 
                 expect(results[0].message).to.equal(
@@ -79,8 +78,9 @@ describe("Sprint-database", () => {
 
     it("Should output all messages from the DB", function(done) {
       // Let's insert a message into the db
-      var queryString = "";
-      var queryArgs = [];
+      var queryString =
+        "INSERT INTO messages (message, user_id, roomname) VALUES (?, ?, ?)";
+      var queryArgs = ["Men like you can never change!", 10, "main"];
       // TODO - The exact query string and query args to use
       // here depend on the schema you design, so I'll leave
       // them up to you. */
