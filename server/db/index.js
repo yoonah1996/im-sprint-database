@@ -4,7 +4,7 @@ const chatDatabase = (queryString, queryArgs = null) => {
   return new Promise((resolve, reject) => {
     const defaultProfile = {
       user: "root",
-      password: "PASSWORD",
+      password: "",
       database: "chat"
     };
 
