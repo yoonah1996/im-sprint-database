@@ -1,36 +1,31 @@
 var mysql = require("mysql");
 
-const chatDatabase = async (queryString, queryArgs = null) => {
-  const getQueryResults = () => {
-    return new Promise((resolve, reject) => {
-      dbConnection.query(queryString, queryArgs, (err, rows) => {
-        if (err) throw err;
-        if (rows === undefined)
-          reject(new Error("Error : rows is not defined"));
-        resolve(rows);
-      });
+const chatDatabase = (queryString, queryArgs = null) => {
+  return new Promise((resolve, reject) => {
+    const defaultProfile = {
+      user: "root",
+      password: "PASSWORD",
+      database: "chat"
+    };
+
+    const dbConnection = mysql.createConnection(defaultProfile);
+
+    dbConnection.connect(err => {
+      if (err) reject(new Error("Error : unable to connect to DB"));
+      /* eslint-disable-next-line no-console */
+      console.log(
+        "============================\nConnected!\n============================"
+      );
     });
-  };
 
-  const defaultProfile = {
-    user: "root",
-    password: "PASSWORD",
-    database: "chat"
-  };
+    dbConnection.query(queryString, queryArgs, (err, rows) => {
+      if (err) throw err;
+      if (rows === undefined) reject(new Error("Error : rows is not defined"));
+      resolve(rows);
+    });
 
-  const dbConnection = mysql.createConnection(defaultProfile);
-
-  await dbConnection.connect(err => {
-    if (err) throw err;
-    /* eslint-disable-next-line no-console */
-    console.log(
-      "============================\nConnected!\n============================"
-    );
+    dbConnection.end();
   });
-
-  const queryResults = await getQueryResults();
-  await dbConnection.end();
-  return await queryResults;
 };
 
 // Create a database connection and export it from this file.

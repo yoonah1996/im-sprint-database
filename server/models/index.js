@@ -34,7 +34,7 @@ const users = {
 
     const userID = rawResult[0].id;
 
-    return await userID;
+    return userID;
   },
   post: async function(username) {
     if (typeof (await this.get(username)) !== "number") {

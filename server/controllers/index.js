@@ -18,7 +18,7 @@ const users = {
   }, // a function which handles a get request for all users
   post: async function(req, res) {
     const userID = await models.users.post(req.body.username);
-    res.status(200).send(userID);
+    res.status(200).json(userID);
   } // a function which handles posting a user to the database
 };
 
