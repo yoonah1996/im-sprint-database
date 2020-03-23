@@ -1,26 +1,26 @@
 var mysql = require("mysql");
 
 const chatDatabase = (queryString, customProfile = null) => {
-  const defaultProfile = {
-    user: "root",
-    password: "PASSWORD",
-    database: "chat"
-  };
+    const defaultProfile = {
+        user: "root",
+        password: "PASSWORD",
+        database: "chat"
+    };
 
-  const dbConnection = mysql.createConnection(
-    customProfile ? customProfile : defaultProfile
-  );
+    const dbConnection = mysql.createConnection(
+        customProfile ? customProfile : defaultProfile
+    );
 
-  dbConnection.connect();
-  let queryResults;
-  dbConnection.query(queryString, (err, rows) => {
-    if (err) throw err;
+    dbConnection.connect();
+    var queryResults;
+    dbConnection.query(queryString, (err, rows) => {
+        if (err) throw err;
 
-    queryResults = rows;
-  });
-  dbConnection.end();
+        queryResults = rows;
+    });
+    dbConnection.end();
 
-  return queryResult;
+    return queryResults;
 };
 
 // Create a database connection and export it from this file.
