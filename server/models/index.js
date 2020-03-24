@@ -1,6 +1,6 @@
 const db = require("../db");
 
-const ormUsers = require("./users");
+const orm = require("./users");
 
 const messages = {
   get: async function() {
@@ -52,5 +52,5 @@ const users = {
 
 
 module.exports = {
-  ormUsers
+  orm
 };
