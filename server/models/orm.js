@@ -1,9 +1,15 @@
-// const db = require("../db/ormIndex");
+require("dotenv").config();
+
 var Sequelize = require("sequelize");
-var db = new Sequelize("chat", "root", "PASSWORD", {
-  host: "localhost",
-  dialect: "mysql"
-});
+var db = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
+  {
+    host: process.env.DB_HOST,
+    dialect: "mysql"
+  }
+);
 
 var User = db.define(
   "users",
@@ -33,7 +39,10 @@ User.hasMany(Message, {
 db.sync({ alter: true });
 
 const ormUsers = {
-  post: function(username) {
+  post: async function(username) {
+    if (await ormUsers.get(username)) {
+      return await ormUsers.get(username);
+    }
     return User.create({ username: username })
       .then(function(data) {
         return data.dataValues.id;
