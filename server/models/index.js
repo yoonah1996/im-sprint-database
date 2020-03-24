@@ -1,55 +1,94 @@
-const db = require("../db");
+require("dotenv").config();
 
-const orm = require("./orm");
-
-/* eslint-disable-next-line */
-const messages = {
-  get: async function() {
-    // const queryString = `SELECT * FROM messages WHERE username=${username} OR roomname=${roomname}`;
-    const queryString = `SELECT * FROM messages`;
-    return await db.chatDatabase(queryString);
-  }, // a function which produces all the messages
-  post: async function({ username, message, roomname }) {
-    let user_id = await users.get(username);
-    if (typeof user_id !== "number") {
-      user_id = await users.post(username);
-    }
-
-    const queryColumns = "(message, user_id, roomname)";
-    const queryValues = `(${JSON.stringify(
-      message
-    )}, ${user_id}, ${JSON.stringify(roomname)})`;
-    const queryString = `INSERT INTO messages ${queryColumns} VALUES ${queryValues}`;
-
-    const queryResult = await db.chatDatabase(queryString);
-    return queryResult.inserID;
+var Sequelize = require("sequelize");
+var db = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
+  {
+    host: process.env.DB_HOST,
+    dialect: "mysql"
   }
-  // a function which can be used to insert a message into the database
-};
+);
 
-const users = {
-  // Ditto as above.
-  get: async function(username) {
-    const queryString = `SELECT id FROM users WHERE username='${username}'`;
-    const rawResult = await db.chatDatabase(queryString);
-
-    if (rawResult[0] === undefined) return "User is not in DB";
-
-    const userID = rawResult[0].id;
-
-    return userID;
+var User = db.define(
+  "users",
+  {
+    username: Sequelize.STRING
   },
+  { timestamps: false }
+);
+// const User = db.User;
+var Message = db.define(
+  "messages",
+  {
+    user_id: Sequelize.INTEGER,
+    message: Sequelize.STRING,
+    roomname: Sequelize.STRING
+  },
+  { timestamps: false }
+);
+
+User.hasMany(Message, {
+  foreignKey: "user_id"
+});
+// Message.belongsTo(User, {
+//   targetKey: "id"
+// });
+
+db.sync({ alter: true });
+
+const ormUsers = {
   post: async function(username) {
-    if (typeof (await this.get(username)) !== "number") {
-      const queryArgs = { username: username };
-      const queryString = `INSERT INTO users SET ?`;
-      await db.chatDatabase(queryString, queryArgs);
+    if (await ormUsers.get(username)) {
+      return await ormUsers.get(username);
     }
-    const userID = await this.get(username);
-    return userID;
+    return User.create({ username: username })
+      .then(function(data) {
+        return data.dataValues.id;
+      })
+      .catch(function(err) {
+        return err;
+      });
+  },
+  get: function(username) {
+    return User.findAll({ where: { username: username } })
+      .then(function(data) {
+        return data[0].id;
+      })
+      .catch(() => {
+        return undefined;
+      });
   }
 };
 
-module.exports = {
-  orm
+const ormMessages = {
+  get: function() {
+    return Message.findAll()
+      .then(function(data) {
+        return data;
+      })
+      .catch(function(err) {
+        return err;
+      });
+  },
+  post: async function({ username, message, roomname }) {
+    let show = await ormUsers.get(username);
+    if (!show) {
+      show = await ormUsers.post(username);
+    }
+    return Message.create({
+      user_id: show,
+      message: message,
+      roomname: roomname
+    })
+      .then(function(data) {
+        return data;
+      })
+      .catch(function(err) {
+        return err;
+      });
+  }
 };
+
+module.exports = { ormUsers, ormMessages };
