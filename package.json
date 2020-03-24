@@ -18,10 +18,13 @@
   },
   "dependencies": {
     "body-parser": "^1.9.2",
+    "dotenv": "^8.2.0",
     "express": "^4.10.1",
     "morgan": "^1.4.1",
     "mysql": "^2.18.1",
-    "request": "^2.69.0"
+    "mysql2": "^2.1.0",
+    "request": "^2.69.0",
+    "sequelize": "^5.21.5"
   },
   "devDependencies": {
     "chai": "^3.5.0",

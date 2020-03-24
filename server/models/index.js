@@ -1,5 +1,8 @@
 const db = require("../db");
 
+const orm = require("./orm");
+
+/* eslint-disable-next-line */
 const messages = {
   get: async function() {
     // const queryString = `SELECT * FROM messages WHERE username=${username} OR roomname=${roomname}`;
@@ -48,6 +51,5 @@ const users = {
 };
 
 module.exports = {
-  messages,
-  users
+  orm
 };
