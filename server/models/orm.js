@@ -36,7 +36,7 @@ User.hasMany(Message, {
 //   targetKey: "id"
 // });
 
-db.sync({ alter: true });
+// db.sync({ alter: true });
 
 const ormUsers = {
   post: async function(username) {

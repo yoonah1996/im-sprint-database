@@ -12,7 +12,7 @@ describe("Sprint-database", () => {
     beforeEach(function(done) {
       dbConnection = mysql.createConnection({
         user: "root",
-        password: "PASSWORD",
+        password: "",
         database: "chat"
       });
       dbConnection.connect();
@@ -80,7 +80,7 @@ describe("Sprint-database", () => {
       // Let's insert a message into the db
       var queryString =
         "INSERT INTO messages (message, user_id, roomname) VALUES (?, ?, ?)";
-      var queryArgs = ["Men like you can never change!", 11, "main"];
+      var queryArgs = ["Men like you can never change!", 1, "main"];
       // TODO - The exact query string and query args to use
       // here depend on the schema you design, so I'll leave
       // them up to you. */
